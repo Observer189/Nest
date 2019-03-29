@@ -1,59 +1,59 @@
 package com.example.demo;
 
 public class Message {
-    String authorName;
-    int authorId;
+    private String authorName;
+    private int authorId;
     int adrId;
-    String text;
-    long time;
-    public Message()
-    {
+    private String text;
+    private long time;
+
+    public Message() {
 
     }
-    public Message(int authorId,int adrId,String text)
-    {
-        this.authorId =authorId;
-        this.adrId=adrId;
-        this.text=text;
-    }
 
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    public void setText(String text) {
+    Message(int authorId, int adrId, String text) {
+        this.authorId = authorId;
+        this.adrId = adrId;
         this.text = text;
     }
 
-    public long getTime() {
+    String getAuthorName() {
+        return authorName;
+    }
+
+    String getText() {
+        return text;
+    }
+
+    void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    void setText(String text) {
+        this.text = text;
+    }
+
+    long getTime() {
         return time;
     }
 
-    public void setTime(long time) {
+    void setTime(long time) {
         this.time = time;
     }
 
-    public int getAuthorId() {
+    int getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    void setAuthorId(int authorId) {
         this.authorId = authorId;
     }
 
-    public int getAdrId() {
+    int getAdrId() {
         return adrId;
     }
 
-    public void setAdrId(int adrId) {
+    void setAdrId(int adrId) {
         this.adrId = adrId;
     }
 }
