@@ -7,14 +7,19 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServlet;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 public class NestController extends HttpServlet {
     private ArrayList<Message> messageAr = new ArrayList<>();
     private ArrayList<Key> keyAr = new ArrayList<>();
+
+
 
     @RequestMapping("/send")
     public ServResponse sendMessage(
@@ -35,14 +40,12 @@ public class NestController extends HttpServlet {
 
     @RequestMapping("/sendKey")
     public ServResponse sendKey(
-            @RequestParam(name = "key") SecretKey key,
-            @RequestParam(name = "authorId") int id,
-            @RequestParam(name = "adrId") int adrId) {
-        Key key1 = new Key();
-        key1.setKey(key);
-        key1.setAuthorId(id);
-        key1.setAdrId(adrId);
-        keyAr.add(key1);
+            @RequestParam(name = "key") String key) {
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(SecretKey.class, new SecretKeyAdapter());
+        Gson gson = builder.create();
+        SecretKey key1 = gson.fromJson(key, SecretKey.class);
 
         ServResponse resp = new ServResponse();
         resp.setMessage("DONE");
@@ -61,11 +64,11 @@ public class NestController extends HttpServlet {
     }
 
     @RequestMapping("/getKey")
-    public SecretKey sendKey(@RequestParam(name = "id") int id) {
-        SecretKey key = null;
+    public Key sendKey(@RequestParam(name = "id") int id) {
+        Key key = null;
         for (int i = 0; i < keyAr.size(); i++) {
             if (keyAr.get(i).getAdrId() == id) {
-                key = keyAr.get(i).getKey();
+                key = keyAr.get(i);
                 keyAr.remove(i);
             }
         }

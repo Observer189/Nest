@@ -2,10 +2,16 @@ package com.example.demo;
 
 import javax.crypto.SecretKey;
 
-class Key {
+public class Key {
     private int authorId;
     private int adrId;
     private SecretKey key;
+
+    public Key(int authorId, int adrId, SecretKey key) {
+        this.authorId = authorId;
+        this.adrId = adrId;
+        this.key = key;
+    }
 
     void setKey(SecretKey key) {
         this.key = key;
