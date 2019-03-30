@@ -1,4 +1,4 @@
-package com.example.demo;
+package demo;
 
 import javax.crypto.SecretKey;
 
