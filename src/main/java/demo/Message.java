@@ -1,20 +1,32 @@
 package demo;
 
 public class Message {
-    String authorName;
-    int authorId;
+    private String authorName;
+    private int authorId;
     int adrId;
-    String text;
-    long time;
+    private String text;
+    private long time;
+    private String key;
+
     public Message()
     {
 
     }
-    public Message(int authorId,int adrId,String text)
+
+    public Message(int authorId,int adrId,String text, String key)
     {
         this.authorId =authorId;
         this.adrId=adrId;
         this.text=text;
+        this.key = key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getKey() {
+        return key;
     }
 
     public String getAuthorName() {
