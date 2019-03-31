@@ -42,9 +42,11 @@ public class NestController extends HttpServlet {
 	@RequestMapping("/get")
 	public ArrayList<Message> getMessages(@RequestParam(name = "id") int id) {
 		ArrayList<Message> response = new ArrayList<Message>();
-		for (Message message : messageAr) {
+		for (int i = 0; i < messageAr.size(); i++) {
+			Message message = messageAr.get(i);
 			if (message.adrId == id) {
 				response.add(message);
+				messageAr.remove(i);
 			}
 		}
 		return response;
