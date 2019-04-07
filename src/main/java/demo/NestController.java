@@ -18,7 +18,7 @@ public class NestController extends HttpServlet {
 
 
 	private GsonBuilder builder = new GsonBuilder();
-	private Gson gson;
+	private Gson gson = builder.create();;
 
 	@RequestMapping("/send")
 	public ServResponse sendMessage(
@@ -29,7 +29,7 @@ public class NestController extends HttpServlet {
 	{
 		Message mes = new Message(id, adrId, message, key);
 
-		Date date = new Date(System.currentTimeMillis() + 3600000);
+		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("(HH:mm:ss)");
 		System.out.println(dateFormat.format(date) + "id:" + id + ":" + message);
 		mes.setTime(date.getTime());
@@ -46,7 +46,8 @@ public class NestController extends HttpServlet {
 		
 		for (Message message : messageAr) {
 			if (message.adrId == id) {
-				response.add(message);
+				String temp=gson.toJson(message);
+				response.add(gson.fromJson(temp, Message.class));
 				removing.add(messageAr.indexOf(message));
 			}
 		}
