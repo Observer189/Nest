@@ -44,6 +44,7 @@ public class NestController extends HttpServlet {
 	public ArrayList<Message> getMessages(@RequestParam(name = "id") int id) {
 		ArrayList<Message> response = new ArrayList<Message>();
         ArrayList<Integer> removing=new ArrayList<Integer>();
+        
 		
 		for (Message message : messageAr) {
 			if (message.adrId == id) {
@@ -52,12 +53,14 @@ public class NestController extends HttpServlet {
 				removing.add(messageAr.indexOf(message));
 			}
 		}
+		if(!removing.isEmpty()) {
 		Collections.sort(removing);
 		for(int i=removing.size()-1;i<=0;i--)
 		{
 			messageAr.remove(removing.get(i).intValue());
 			
 			//System.out.println("!!!"+removing.size()+"!!!");
+		}
 		}
 		
 		return response;
