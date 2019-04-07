@@ -53,7 +53,9 @@ public class NestController extends HttpServlet {
 		}
 		for(int i=0;i<removing.size();i++)
 		{
-			messageAr.remove(removing.get(i).intValue());
+			//messageAr.remove(removing.get(i).intValue());
+			messageAr.remove(0);
+			System.out.println("!!!"+removing.size()+"!!!");
 		}
 		
 		return response;
