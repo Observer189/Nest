@@ -10,6 +10,7 @@ import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServlet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 @RestController
@@ -51,11 +52,12 @@ public class NestController extends HttpServlet {
 				removing.add(messageAr.indexOf(message));
 			}
 		}
-		for(int i=0;i<removing.size();i++)
+		Collections.sort(removing);
+		for(int i=removing.size()-1;i<=0;i--)
 		{
-			//messageAr.remove(removing.get(i).intValue());
-			messageAr.remove(0);
-			System.out.println("!!!"+removing.size()+"!!!");
+			messageAr.remove(removing.get(i).intValue());
+			
+			//System.out.println("!!!"+removing.size()+"!!!");
 		}
 		
 		return response;
