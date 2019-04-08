@@ -16,7 +16,7 @@ import java.util.Date;
 @RestController
 public class NestController extends HttpServlet {
 	private ArrayList<Message> messageAr = new ArrayList<Message>();
-
+    private ArrayList<Integer> idAr=new ArrayList<Integer>();
 
 	private GsonBuilder builder = new GsonBuilder();
 	private Gson gson = builder.create();;
@@ -53,10 +53,14 @@ public class NestController extends HttpServlet {
 				removing.add(messageAr.indexOf(message));
 			}
 		}
-		if(!removing.isEmpty()) {
+		System.out.println(response.size());
+		System.out.println(messageAr.size());
+		System.out.println(removing);
+		if(!response.isEmpty()) {
 		Collections.sort(removing);
-		for(int i=removing.size()-1;i<=0;i--)
+		for(int i=removing.size()-1;i>=0;i--)
 		{
+			System.out.println(i);
 			messageAr.remove(removing.get(i).intValue());
 			
 			//System.out.println("!!!"+removing.size()+"!!!");
@@ -65,4 +69,26 @@ public class NestController extends HttpServlet {
 		
 		return response;
 	}
+	@RequestMapping("/register")
+	  public Integer register(@RequestParam(name="id") int id)
+	  {
+		boolean isExist=false;
+		for(int i=0;i<idAr.size();i++)
+		{
+			if(id==idAr.get(i))
+			{
+				isExist=true;
+			}
+			
+		}
+		if(isExist)
+		{
+			return 0;
+		}
+		else
+		{
+			idAr.add(id);
+			return 1;
+		}
+	  }
 }
